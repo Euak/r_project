@@ -23,3 +23,15 @@ desocupados3$período <-  str_replace(desocupados3$período, "\\|\\|", "")
 names(desocupados)
 
 View(periodos)
+
+
+#rename collumns
+colnames(desocupados3) <- c("Region", "Trimester", "Quantity", "Period")
+
+#reorder collumns
+desocupados4 <- desocupados3[,c(1,2,4,3)]
+
+#remanage tables
+desocupados_raw <- desocupados
+desocupados <- desocupados4
+rm(desocupados2,desocupados3,desocupados4)
