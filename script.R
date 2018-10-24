@@ -51,6 +51,11 @@ desocupados_estado <- subset(desocupados_estado, Period != "Total")
 desocupados_regiao <- subset(desocupados_regiao, Period != "Total")
 desocupados_brasil <- subset(desocupados_brasil, Period != "Total")
 
+#Fix levels para Region
+desocupados_estado$Region <- factor(desocupados_estado$Region)
+desocupados_regiao$Region <- factor(desocupados_regiao$Region)
+desocupados_brasil$Region <- factor(desocupados_brasil$Region)
+
 #group by region
 desocupados_regiao %>% 
   group_by(Region) %>% 
@@ -74,4 +79,8 @@ desocupados_regiao %>%
   ggplot(aes(x = Period, y = Quantity)) +
   geom_bar(stat = "identity") +
   facet_wrap(~Region)
-  
+
+## Statistics 'by' Region
+by(desocupados_regiao$Quantity, desocupados_regiao$Region, summary)
+by(desocupados_estado$Quantity, desocupados_estado$Region, summary)
+
